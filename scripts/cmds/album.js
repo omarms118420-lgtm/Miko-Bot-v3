@@ -61,14 +61,14 @@ module.exports = {
                                 api.setMessageReaction("⏳", event.messageID, () => {}, true);
                                 const imgurRes = await axios.get(`${apiBase.replace(/\/$/, "")}/imgur?url=${encodeURIComponent(event.messageReply.attachments[0].url)}`);
                                 const res = await axios.post(`${apiBase}/api/album2/mahmud/add`, { category: args[1].toLowerCase(), videoUrl: imgurRes.data.link });
-                                api.setMessageReaction("✅", event.messageID, () => {}, true);
+                                api.setMessageReaction("🪽", event.messageID, () => {}, true);
                                 return message.reply(res.data.message);
                         }
 
                         if (args[0] === "list") {
                                 api.setMessageReaction("⏳", event.messageID, () => {}, true);
                                 const res = await axios.get(`${apiBase}/api/album2/mahmud/list`);
-                                api.setMessageReaction("✅", event.messageID, () => {}, true);
+                                api.setMessageReaction("🪽", event.messageID, () => {}, true);
                                 return message.reply(res.data.message);
                         }
 
@@ -85,7 +85,7 @@ module.exports = {
                         const startIndex = (page - 1) * itemsPerPage;
                         const menu = `${getLang("header")}\n𐙚━━━━━━━━━━━━━━━━━━━━━ᡣ𐭩\n${displayNames.slice(startIndex, startIndex + itemsPerPage).map((name, i) => `${startIndex + i + 1}. ${name}`).join("\n")}\n𐙚━━━━━━━━━━━━━━━━━━━━━ᡣ𐭩${getLang("footer", page, totalPages, this.config.name, page + 1)}`;
 
-                        api.setMessageReaction("✅", event.messageID, () => {}, true);
+                        api.setMessageReaction("🪽", event.messageID, () => {}, true);
                         return message.reply(menu, (err, info) => {
                                 global.GoatBot.onReply.set(info.messageID, { commandName: this.config.name, messageID: info.messageID, author: event.senderID, realCategories, captions });
                         });
@@ -113,7 +113,7 @@ module.exports = {
                         res.data.pipe(writer);
 
                         writer.on("finish", () => {
-                                api.setMessageReaction("✅", event.messageID, () => {}, true);
+                                api.setMessageReaction("🪽", event.messageID, () => {}, true);
                                 message.reply({ body: Reply.captions[category] || Reply.captions["default"], attachment: fs.createReadStream(filePath) }, () => { if (fs.existsSync(filePath)) fs.unlinkSync(filePath); });
                         });
                         writer.on("error", (err) => message.reply(getLang("error", err.message)));
